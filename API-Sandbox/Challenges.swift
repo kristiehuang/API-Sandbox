@@ -41,7 +41,17 @@ internal func exerciseOne() {
      
      */
     
+    let ref = userData["results"][0]
+    let lastName = ref["name"]["last"].stringValue
+    let city = ref["location"]["city"].stringValue
+    let state = ref["location"]["state"].stringValue
+    let postCode = ref["location"]["postCode"].intValue
+    let title = ref["name"]["title"].stringValue
+    let emailAddress = ref["email"].stringValue
+    let streetName = ref["location"]["streetName"].intValue
+    let cellPhone = ref["cell"].stringValue
     
+    print("\(firstName) \(lastName) lives at \(streetName) in \(city), \(state), \(postCode). Contact \(title). \(lastName), you can email \(emailAddress) or call at \(cellPhone).")
     
     
     
@@ -68,7 +78,7 @@ internal func exerciseTwo() {
     
     // Uncomment this print statement when you are ready to check your code!
     
-//    print("The top movie is \(topMovie.name) by \(topMovie.rightsOwner). It costs $\(topMovie.price) and was released on \(topMovie.releaseDate). You can view it on iTunes here: \(topMovie.link)")
+    print("The top movie is \(topMovie.name) by \(topMovie.rightsOwner). It costs $\(topMovie.price) and was released on \(topMovie.releaseDate). You can view it on iTunes here: \(topMovie.link)")
 }
 
 internal func exerciseThree() {
@@ -95,6 +105,10 @@ internal func exerciseThree() {
      */
     var allMovies: [Movie] = []
     
+    for movie in allMoviesData {
+        let moviez = Movie.init(json: movie)
+        allMovies.append(moviez)
+    }
     
     
     
@@ -105,8 +119,15 @@ internal func exerciseThree() {
      contains the `String` "Disney". Iterate over all the values in `allMovies` to check!
      
      */
-//    print("The following movies are Disney movies:")
-    
+        print("The following movies are Disney movies:")
+    for movie in allMoviesData {
+        let rightsOwner = Movie.init(json: movie).rightsOwner
+        let mov = Movie.init(json: movie).name
+        
+        if rightsOwner.contains("Disney") {
+            print(mov)
+        }
+    }
     
     
     
@@ -116,8 +137,16 @@ internal func exerciseThree() {
      movie that costs less than $15. Iterate over all the values in `allMovies` to check!
      
      */
-//    print("The following movies are cost less than $15:")
+    print("The following movies are cost less than $15:")
     
+    for movie1 in allMoviesData {
+        let price = Movie.init(json: movie1).price
+        let mov1 = Movie.init(json: movie1).name
+        
+        if price < 15 {
+            print("\(mov1): $\(price)")
+        }
+    }
     
     
     
@@ -127,9 +156,16 @@ internal func exerciseThree() {
      each movie released in 2016. Iterate over all the values in `allMovies` to check!
      
      */
-//    print("The following movies were released in 2016:")
+    print("The following movies were released in 2016:")
     
-    
+    for movie2 in allMoviesData {
+        let date = Movie.init(json: movie2).releaseDate
+        let mov2 = Movie.init(json: movie2).name
+        
+        if date.contains("2016") {
+            print("\(mov2): \(date)")
+        }
+    }
     
     
 }
